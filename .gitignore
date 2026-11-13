@@ -1,0 +1,33 @@
+# Runtime-only artifacts; do not commit credentials, browser sessions or executables.
+bin/
+cache/
+downloads/
+uv-tools/
+.venv/
+private/
+__pycache__/
+*.pyc
+node_modules/
+*.log
+
+# Local credentials, runtime state, dependencies and temporary work
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.tar.gz
+*.bundle
+*.log
+*.pem
+*.key
+.env
+.env.*
+!.env.example
+.ci/
+.sort-staging-*/

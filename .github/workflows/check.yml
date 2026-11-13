@@ -1,0 +1,26 @@
+name: Check
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/checkout@v4
+        with:
+          repository: Kfjie-MCP/auth-ui
+          path: .ci/auth-ui
+      - name: Mount shared OAuth renderer
+        run: sudo mkdir -p /opt/mcp && sudo ln -s "$GITHUB_WORKSPACE/.ci/auth-ui" /opt/mcp/auth-ui
+      - run: python3 -m compileall -q server.py
+      - run: npm ci && npm run check
+        working-directory: gateway
